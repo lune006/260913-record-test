@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f3eb" />
+    <meta name="description" content="커피와 디저트의 맛, 향, 순간을 기록하는 테이스팅 저널" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>TASTE NOTE — 커피 & 디저트 기록</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="테이스트 노트 홈">
+        <svg viewBox="0 0 38 38" aria-hidden="true"><path d="M9 13c1-4 5-7 10-7s9 3 10 7v12c0 4-4 7-10 7S9 29 9 25V13Z"/><path d="M29 15h2c3 0 5 2 5 5s-2 5-6 5M13 12c4 2 8 2 12 0M15 18c1 2 2 3 4 3s3-1 4-3"/></svg>
+        <span>TASTE NOTE</span>
+      </a>
+      <nav aria-label="주요 메뉴"><a href="#write">기록하기</a><a href="#archive">나의 기록</a></nav>
+      <button class="outline-button" id="headerWrite" type="button">새 기록</button>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="kicker">COFFEE & DESSERT JOURNAL</p>
+          <h1 id="heroTitle">오늘의 맛을<br />천천히 기록해요.</h1>
+          <p class="hero-description">한 잔의 향과 한 조각의 달콤함.<br />좋았던 순간을 나만의 언어로 남겨보세요.</p>
+          <a class="primary-link" href="#write">첫 기록 남기기 <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <img src="./assets/tasting-still-life.png" alt="" />
+          <span class="art-note">A SMALL RITUAL<br />FOR EVERY DAY</span>
+        </div>
+        <p class="hero-index" aria-hidden="true">VOL. 01</p>
+      </section>
+
+      <section class="journal" id="write" aria-labelledby="writeTitle">
+        <div class="section-heading">
+          <div><p class="kicker">NEW TASTING NOTE</p><h2 id="writeTitle">무엇을 맛보셨나요?</h2></div>
+          <p>종류를 고르고 오늘 느낀 맛을<br />있는 그대로 기록해 보세요.</p>
+        </div>
+        <form id="tastingForm" class="tasting-form">
+          <div class="form-column form-column-main">
+            <fieldset class="type-fieldset">
+              <legend>종류 선택</legend>
+              <div class="category-tabs" role="tablist" aria-label="카테고리 선택">
+                <button class="category-tab active" data-category="coffee" type="button" role="tab" aria-selected="true">COFFEE</button>
+                <button class="category-tab" data-category="dessert" type="button" role="tab" aria-selected="false">DESSERT</button>
+              </div>
+              <div class="item-grid" id="itemGrid" aria-live="polite"></div>
+            </fieldset>
+            <div class="field-row">
+              <label class="field"><span>이름</span><input id="itemName" name="name" type="text" maxlength="40" placeholder="메뉴 또는 원두 이름" required /></label>
+              <label class="field"><span>장소</span><input id="place" name="place" type="text" maxlength="40" placeholder="카페 또는 장소" /></label>
+              <label class="field"><span>날짜</span><input id="tastedAt" name="date" type="date" required /></label>
+            </div>
+          </div>
+          <div class="form-column taste-panel">
+            <fieldset><legend>맛의 인상</legend><div class="rating-list" id="ratingList"></div></fieldset>
+            <fieldset class="flavor-fieldset"><legend>기억하고 싶은 향미</legend><div class="flavor-tags" id="flavorTags"></div></fieldset>
+            <label class="field memo-field"><span>한 줄 기록</span><textarea id="memo" name="memo" maxlength="140" rows="3" placeholder="맛과 향, 함께한 순간을 자유롭게 적어보세요."></textarea><small><b id="memoCount">0</b> / 140</small></label>
+            <div class="overall-row">
+              <div><span class="field-label">오늘의 만족도</span><p>다시 찾고 싶은 맛인가요?</p></div>
+              <div class="overall-rating" id="overallRating" aria-label="만족도 선택"></div>
+            </div>
+            <button class="save-button" type="submit"><span>이 맛 기록하기</span><span aria-hidden="true">→</span></button>
+            <p class="form-message" id="formMessage" role="status"></p>
+          </div>
+        </form>
+      </section>
+
+      <section class="archive" id="archive" aria-labelledby="archiveTitle">
+        <div class="archive-header">
+          <div><p class="kicker">MY TASTE ARCHIVE</p><h2 id="archiveTitle">차곡차곡 쌓인 맛</h2></div>
+          <div class="archive-tools">
+            <div class="filter-group" aria-label="기록 필터">
+              <button class="filter-button active" data-filter="all" type="button">ALL</button>
+              <button class="filter-button" data-filter="coffee" type="button">COFFEE</button>
+              <button class="filter-button" data-filter="dessert" type="button">DESSERT</button>
+            </div>
+            <button class="text-button" id="clearRecords" type="button">전체 비우기</button>
+          </div>
+        </div>
+        <div class="record-grid" id="recordGrid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="wordmark footer-mark" href="#top"><span>TASTE NOTE</span></a>
+      <p>좋아하는 맛을 알아가는 가장 다정한 방법</p>
+      <p>PERSONAL TASTING JOURNAL</p>
+    </footer>
+
+    <template id="emptyTemplate">
+      <div class="empty-state">
+        <svg viewBox="0 0 120 88" aria-hidden="true"><path d="M29 24h54v31c0 12-11 21-27 21S29 67 29 55V24Z"/><path d="M83 31h7c9 0 14 6 14 13S99 57 86 57M36 23c12 6 28 6 40 0M46 39c2 3 5 5 10 5s8-2 10-5"/><path d="M18 76h83"/></svg>
+        <h3>아직 남긴 기록이 없어요.</h3><p>오늘의 한 잔부터 가볍게 시작해 보세요.</p><a href="#write">기록하러 가기</a>
+      </div>
+    </template>
+    <script src="./app.js"></script>
+  </body>
+</html>
